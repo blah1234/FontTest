@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">FontTest</string>
+    <string name="tab_text_1">Text Color alpha</string>
+    <string name="tab_text_2">TextView alpha</string>
+    <string name="tab_text_3">ADD Xfer mode</string>
+    <string name="logout">تسجيل الخروج</string>
+</resources>
