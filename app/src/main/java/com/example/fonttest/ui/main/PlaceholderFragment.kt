@@ -3,6 +3,7 @@ package com.example.fonttest.ui.main
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.PorterDuff
+import android.graphics.PorterDuffXfermode
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,9 +14,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.fonttest.R
 import com.example.fonttest.databinding.FragmentMainBinding
-import android.graphics.PorterDuffXfermode
-
-
 
 
 /**
@@ -56,6 +54,7 @@ class PlaceholderFragment : Fragment() {
         val textView: TextView = binding.sectionLabel
 
         val tab = arguments?.getInt(ARG_SECTION_NUMBER) ?: 1
+        var layerPaint: Paint? = null
 
         if (tab == 0) {
             textView.setTextColor(requireContext().resources.getColor(R.color.player_vibrant_tertiary))
@@ -65,10 +64,11 @@ class PlaceholderFragment : Fragment() {
         }
 
         if (tab == 2) {
-            val layerPaint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.DITHER_FLAG or Paint.FILTER_BITMAP_FLAG)
-            layerPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_OVER)
-            textView.setLayerType(View.LAYER_TYPE_SOFTWARE, layerPaint)
+            layerPaint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.DITHER_FLAG or Paint.FILTER_BITMAP_FLAG)
+            layerPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.ADD)
         }
+
+        textView.setLayerType(View.LAYER_TYPE_SOFTWARE, layerPaint)
     }
 
     companion object {
